@@ -28,6 +28,7 @@ func SimpleGeneticAlgorithm(population []string) {
 		// select most fit pair from population
 		parents := SelectMostFitPair(population)
 
+		// TODO CHECK METHOD FOR CORRECTNESS
 		// have parents reproduce children
 		children := Crossover([]byte(parents[0]), []byte(parents[1]))
 
@@ -42,6 +43,7 @@ func SimpleGeneticAlgorithm(population []string) {
 		fittestChild, fittestChildFitness := getFittestChild(children[0], children[1])
 		leastFitMemberIndex, leastFitMemberFitness := getLeastFitMember(population)
 
+		// TODO CHECK METHOD FOR CORRECTNESS
 		if fittestChildFitness > leastFitMemberFitness {
 			population = replaceLeastFitMember(fittestChild, leastFitMemberIndex, population)
 		}
@@ -85,7 +87,7 @@ func SelectMostFitPair(population []string) []string {
 	for _, member := range population {
 		// fmt.Println("Member: ", member)
 		fitness := CalculateFitness(member)
-		if fitness > mostFitFitness {
+		if fitness >= mostFitFitness {
 			// message := fmt.Sprintf("Current most fit member: %v with fitness score: %v", member, fitness)
 			// fmt.Println(message)
 
@@ -96,7 +98,7 @@ func SelectMostFitPair(population []string) []string {
 			// make current member most fit
 			mostFit = member
 			mostFitFitness = fitness
-		} else if fitness > secondMostFitFitness {
+		} else if fitness >= secondMostFitFitness {
 			// message := fmt.Sprintf("Current second most fit member: %v with fitness score: %v", member, fitness)
 			// fmt.Println(message)
 
@@ -187,7 +189,7 @@ func getLeastFitMember(population []string) (int, int) {
 
 	for index, member := range population {
 		fitness := CalculateFitness(member)
-		if fitness < leastFitMemberFitness {
+		if fitness <= leastFitMemberFitness {
 			leastFitMemberIndex = index
 			leastFitMemberFitness = fitness
 		}
@@ -209,10 +211,10 @@ func getHighestFitnessScore(population []string) int {
 }
 
 func replaceLeastFitMember(newMember string, index int, population []string) []string {
-	// fmt.Println("Old member: ", population[index])
+	fmt.Println("Old member: ", population[index])
 	population[index] = newMember
 
-	// fmt.Println("New member: ", population[index])
+	fmt.Println("New member: ", population[index])
 
 	return population
 }
