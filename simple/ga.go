@@ -28,7 +28,6 @@ func SimpleGeneticAlgorithm(population []string) {
 		// select most fit pair from population
 		parents := SelectMostFitPair(population)
 
-		// TODO CHECK METHOD FOR CORRECTNESS
 		// have parents reproduce children
 		children := Crossover([]byte(parents[0]), []byte(parents[1]))
 
@@ -43,7 +42,6 @@ func SimpleGeneticAlgorithm(population []string) {
 		fittestChild, fittestChildFitness := getFittestChild(children[0], children[1])
 		leastFitMemberIndex, leastFitMemberFitness := getLeastFitMember(population)
 
-		// TODO CHECK METHOD FOR CORRECTNESS
 		if fittestChildFitness > leastFitMemberFitness {
 			population = replaceLeastFitMember(fittestChild, leastFitMemberIndex, population)
 		}
@@ -72,8 +70,6 @@ func CalculateFitness(member string) int {
 			fitnessCount++
 		}
 	}
-	// message := fmt.Sprintf("Fitness level: %v", fitnessCount)
-	// fmt.Println(message)
 
 	return fitnessCount
 }
